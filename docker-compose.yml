@@ -13,7 +13,7 @@ services:
       - MARIADB_CHARACTER_SET=utf8mb4
       - MARIADB_COLLATE=utf8mb4_unicode_ci
     volumes:
-      - '/app/lms/mariadb_data:/app/lms/bitnami/mariadb'
+      - './mariadb_data:/app/lms/bitnami/mariadb'
   moodle:
     image: 'docker.io/bitnami/moodle:3-debian-10'
     ports:
@@ -28,6 +28,6 @@ services:
       - MOODLE_DATABASE_NAME=bitnami_moodle
       - MOODLE_DATABASE_PASSWORD=Picolo321
     volumes:
-      - '/app/lms/moodle_data:/app/lms/bitnami/moodle'
+      - './moodle_data:/app/lms/bitnami/moodle'
     depends_on:
       - mariadb
