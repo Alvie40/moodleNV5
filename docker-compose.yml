@@ -1,0 +1,33 @@
+version: '2'
+services:
+  mariadb:
+    image: 'docker.io/bitnami/mariadb:10.5-debian-10'
+    ports:
+      - '3346:3306'    
+    environment:
+      - MARIADB_ROOT_USER=root
+      - MARIADB_ROOT_PASSWORD=Picolo321  
+      - MARIADB_USER=treinar
+      - MARIADB_PASSWORD=Picolo321 
+      - MARIADB_DATABASE=bitnami_moodle
+      - MARIADB_CHARACTER_SET=utf8mb4
+      - MARIADB_COLLATE=utf8mb4_unicode_ci
+    volumes:
+      - '/app/lms/mariadb_data:/app/lms/bitnami/mariadb'
+  moodle:
+    image: 'docker.io/bitnami/moodle:3-debian-10'
+    ports:
+      - '8800:8080'
+      - '8443:8443'
+    environment:
+      - MOODLE_USER=treinar
+      - MOODLE_PASSWORD=Picolo321      
+      - MOODLE_DATABASE_HOST=mariadb
+      - MOODLE_DATABASE_PORT_NUMBER=3306
+      - MOODLE_DATABASE_USER=treinar
+      - MOODLE_DATABASE_NAME=bitnami_moodle
+      - MOODLE_DATABASE_PASSWORD=Picolo321
+    volumes:
+      - '/app/lms/moodle_data:/app/lms/bitnami/moodle'
+    depends_on:
+      - mariadb
