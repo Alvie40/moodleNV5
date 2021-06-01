@@ -33,3 +33,4 @@ services:
     depends_on:
       - mariadb
 # need create network docker network create moodle-network
+# need create volume docker volume create --name mariadb_data
