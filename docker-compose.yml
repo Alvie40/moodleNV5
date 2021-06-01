@@ -40,7 +40,7 @@ networks:
 volumes:
     mariadb_data:
         external: true
-    moodle:
+    moodle_data:
         external: true
     moodledata:
         external: true
