@@ -7,6 +7,9 @@ networks:
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
+    restart: always
+    ports:
+      - '3386:3306'
     environment:
       - MARIADB_ROOT_USER=root
       - MARIADB_ROOT_PASSWORD=Picolo321
