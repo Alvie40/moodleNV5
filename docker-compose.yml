@@ -8,6 +8,8 @@ services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     environment:
+      - MARIADB_ROOT_USER=root
+      - MARIADB_ROOT_PASSWORD=Picolo321
       - MARIADB_USER=treinar
       - MARIADB_PASSWORD=Picolo321
       - MARIADB_DATABASE=bitnami_moodle
