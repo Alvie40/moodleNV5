@@ -34,5 +34,11 @@ services:
       - moodledata_data:/app/moodle/bitnami/moodledata
     depends_on:
       - mariadb
+networks:
+    moodle-network:
+       external: true
+volumes:
+    mariadb_data:
+        external: true
 # need create network docker network create moodle-network
 # need create volume docker volume create --name mariadb_data
