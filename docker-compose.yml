@@ -42,7 +42,7 @@ volumes:
         external: true
     moodle_data:
         external: true
-    moodledata:
+    moodledata_data:
         external: true
 # need create network docker network create moodle-network
 # need create volume docker volume create --name mariadb_data
