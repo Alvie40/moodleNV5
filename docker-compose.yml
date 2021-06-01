@@ -1,59 +1,42 @@
-version: "3.3"
+version: '2'
 services:
   mariadb:
-    image: 'docker.io/bitnami/mariadb:10.5-debian-10'
-    networks:
-      - moodle-network
-    container_name: db_container
-    restart: always    
-    ports:
-      - '3386:3306'   
+    image: 'mariadb:10'
+    container_name: db
     environment:
-      - MARIADB_ROOT_USER=root
-      - MARIADB_ROOT_PASSWORD=Picolo321
-      - MARIADB_USER=treinar
-      - MARIADB_PASSWORD=Picolo321
-      - MARIADB_DATABASE=bitnami_moodle
-      - MARIADB_CHARACTER_SET=utf8mb4
-      - MARIADB_COLLATE=utf8mb4_unicode_ci
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_DATABASE: moodle
+      MYSQL_USER: moodle
+      MYSQL_PASSWORD: moodlePassword
     volumes:
-      - type: bind
-        source: app/moodle/mariadb_data
-        target: app/moodle/bitnami/mariadb
+      - $HOME/volumes/mysql:/var/lib/mysql
+
   moodle:
-    image: "docker.io/bitnami/moodle:3-debian-10"
-    networks:
-      - moodle-network
-    ports:
-      - '80:8080'
-      - '443:8443'
+    image: 'bitnami/moodle:3'
+    container_name: moodle
     environment:
-      - MOODLE_USERNAME=treinar
-      - MOODLE_PASSWORD=Picolo321
-      - MOODLE_DATABASE_HOST=mariadb
-      - MOODLE_DATABASE_PORT_NUMBER=3306
-      - MOODLE_DATABASE_USER=treinar
-      - MOODLE_DATABASE_NAME=bitnami_moodle
-      - MOODLE_DATABASE_PASSWORD=Picolo321
+      MOODLE_USERNAME: programster
+      MOODLE_PASSWORD: thisIsMyMoodleLoginPassword
+      MOODLE_EMAIL: admin@programster.org
+      MARIADB_HOST: db
+      MARIADB_PORT_NUMBER: 3306
+      MOODLE_DATABASE_USER: moodle
+      MOODLE_DATABASE_NAME: moodle
+      MOODLE_DATABASE_PASSWORD: moodlePassword
+      ALLOW_EMPTY_PASSWORD: "no"
+    ports:
+      - '80:80'
+      - '443:443'
     volumes:
-      - type: bind
-        source: app/moodle/moodle_data
-        target: app/moodle/bitnami/moodle
-      - type: bind
-        source: app/moodle/moodledata_data
-        target: app/moodle/bitnami/moodledata
+      - $HOME/volumes/moodle:/bitnami'
     depends_on:
       - mariadb
-networks:
-    moodle-network:
-       external: true
+
 volumes:
-    mariadb_data:
-        external: true
-    moodle_data:
-        external: true
-    moodledata_data:
-        external: true
+  mariadb_data:
+    driver: local
+  moodle_data:
+    driver: local
 # need create network docker network create moodle-network
 # need create volume docker volume create --name mariadb_data
 # chmod 
