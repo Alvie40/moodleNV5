@@ -5,8 +5,8 @@ services:
     environment:
       - MARIADB_ROOT_USER=root
       - MARIADB_ROOT_PASSWORD=Picolo321
-      - MARIADB_USER=bn_moodle
-      - MARIADB_PASSWORD=bitnami
+      - MARIADB_USER=treinar
+      - MARIADB_PASSWORD=Picolo321
       - MARIADB_DATABASE=bitnami_moodle
       - MARIADB_CHARACTER_SET=utf8mb4
       - MARIADB_COLLATE=utf8mb4_unicode_ci
@@ -20,13 +20,12 @@ services:
     environment:
       - MOODLE_DATABASE_HOST=mariadb
       - MOODLE_DATABASE_PORT_NUMBER=3306
-      - MOODLE_DATABASE_USER=bn_moodle
-      - MOODLE_DATABASE_PASSWORD=bitnami
+      - MOODLE_DATABASE_USER=treinar
+      - MOODLE_DATABASE_PASSWORD=Picolo321
       - MOODLE_DATABASE_NAME=bitnami_moodle
-      - MOODLE_USERNAME=user
-      - MOODLE_PASSWORD=bitnami
+      - MOODLE_USER=treinar
+      - MOODLE_PASSWORD=Picolo321
     volumes:
       - ./moodle_data:/bitnami/moodle
-      - ./moodledata_data:/bitnami/moodledata
     depends_on:
       - mariadb
