@@ -3,7 +3,7 @@ services:
   mariadb:
     image: 'docker.io/bitnami/mariadb:10.5-debian-10'
     ports:
-      - '3346:3306'   
+      - '3386:3306'   
     environment:
       - MARIADB_ROOT_USER=root
       - MARIADB_ROOT_PASSWORD=Picolo321
