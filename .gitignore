@@ -1,0 +1,3 @@
+# Ignorar diretórios de persistência
+/mariadb_data/
+/moodle_data/
